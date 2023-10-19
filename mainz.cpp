@@ -45,10 +45,6 @@ int main(void)
 
     std::vector<std::vector<std::vector<int>>> blob_info;
     findBlob(blob_info, blobs, row, column);
-    for(int i = 0; i < blob_info.size(); i++)
-    {
-        std::cout << blob_info.at(i).size() << std::endl;
-    }
 
     showBlobs(blobs, row, column);
     showBlobInfo(blob_info);
@@ -106,22 +102,23 @@ void addLineNum(int width) // adds line number to the table
 
 void showBlobs(char** charArr, int row, int column)
 {
-
+    std::cout << "\n\n";
     addLineNum(column); // adds line number to the table
     addLine(2 * column - 1); // adds line between line numbers and table. it adds 2*column-1 char because I added 1 space between rows.
 
     for(int i = 0; i < row; i++)
     {
-        std::cout << i << "|";
+        std::cout << i % 10 << "|";
         for(int j = 0; j < column; j++)
         {
             std::cout << charArr[i][j] << " ";
         }
-        std::cout << "\b|" << i << std::endl; // '\b' is for erasing the last space after last member of the each row
+        std::cout << "\b|" << i % 10 << std::endl; // '\b' is for erasing the last space after last member of the each row
     }
 
     addLine(2 * column - 1);
     addLineNum(column);
+    std::cout << "\n\n";
 }
 
 //ascii number of 'A' is 65
@@ -136,10 +133,10 @@ void findBlob(std::vector<std::vector<std::vector<int>>>& blob_info, char** char
         {
             if(charArr[i][j] == 'x')
             {
-                blob_id++;
                 blob_info_holder.clear();
                 blob_reshaper(blob_info_holder, charArr, blob_id, row, column, i, j);
                 blob_info.push_back(blob_info_holder);
+                blob_id++;
             }
         }
     }
