@@ -1,9 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 void readCharFromFile(std::ifstream& charFile, char** charArr, int row, int column);
 void showBlobs(char** charArr, int row, int column);
+void findBlob(char** charArr, int row, int column);
+void blob_reshaper(std::vector<std::vector<int>>& blob_info_hld, char** charArr, char blob_id, int row, int column, int row_loc, int column_loc);
+
 
 int main(void)
 {
@@ -36,6 +40,10 @@ int main(void)
     inputFile.close(); //closing the input file
 
     showBlobs(blobs, row, column); //shows the blobs with pretty format
+
+    findBlob(blobs, row, column);
+
+    showBlobs(blobs, row, column);
 
     //releasing the memory
     for(int i = 0; i < row; i++)
@@ -91,6 +99,7 @@ void addLineNum(int width) // adds line number to the table
 
 void showBlobs(char** charArr, int row, int column)
 {
+
     addLineNum(column); // adds line number to the table
     addLine(2 * column - 1); // adds line between line numbers and table. it adds 2*column-1 char because I added 1 space between rows.
 
@@ -106,4 +115,45 @@ void showBlobs(char** charArr, int row, int column)
 
     addLine(2 * column - 1);
     addLineNum(column);
+}
+
+//ascii number of 'A' is 65
+
+void findBlob(char** charArr, int row, int column)
+{
+    char blob_id = 65;
+    std::vector<std::vector<std::vector<int>>> blob_info;
+    std::vector<std::vector<int>> blob_info_holder;
+    for(int i = 0; i < row; i++)
+    {
+        for(int j = 0; j < column; j++)
+        {
+            if(charArr[i][j] == 'x')
+            {
+                blob_id++;
+                blob_info_holder.clear();
+                blob_reshaper(blob_info_holder, charArr, blob_id, row, column, i, j);
+                blob_info.push_back(blob_info_holder);
+            }
+        }
+    }
+    std::cout << blob_info.size();
+    std::cout << blob_info_holder.size() << std::endl;
+}
+
+void blob_reshaper(std::vector<std::vector<int>>& blob_info_hld, char** charArr, char blob_id, int row, int column, int row_loc, int column_loc)
+{
+    if(row_loc < 0 || column_loc < 0 || row_loc >= row || column_loc >= column || charArr[row_loc][column_loc] != 'x')
+    {
+        return;
+    }
+
+    blob_info_hld.push_back({row_loc, column_loc});
+    charArr[row_loc][column_loc] = blob_id;
+    
+    int moves[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    for(int i = 0; i < 4; i++)
+    {
+        blob_reshaper(blob_info_hld, charArr, blob_id, row, column, row_loc + moves[i][0], column_loc + moves[i][1]);
+    }
 }
