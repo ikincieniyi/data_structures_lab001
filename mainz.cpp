@@ -2,11 +2,16 @@
 #include <fstream>
 #include <string>
 
+void readCharFromFile(std::ifstream& charFile, char** charArr, int row, int column);
 
 int main(void)
 {
+    std::string fileName;
+    std::cout << "Enter the file name: ";
+    std::cin >> fileName;
+    
     std::ifstream inputFile;
-    inputFile.open("blobs1.txt");
+    inputFile.open(fileName);
     if(!inputFile.is_open())
     {
         std::cout << "Couldn't open inputFile" << std::endl;
@@ -15,29 +20,30 @@ int main(void)
     int row = 0;
     int column = 0;
 
-    inputFile >> row;
-    inputFile >> column;
-    inputFile.ignore();
+    inputFile >> row >> column;
+    inputFile.ignore(); //ignoring the end line character(\n)
 
-    //std::cout << "row: " << row << ", column: " << column << std::endl;
-
+    //creating a 2d dynamic array for storing the input
     char** blobs = new char*[row];
     for(int i = 0; i < row; i++)
     {
         blobs[i] = new char[column];
     }
 
-    std::string blobStr; //this char array will carry the data from given file to the blobs array
+    readCharFromFile(inputFile, blobs, row, column);
+/*     //reading the input from the file
+    std::string blobStr; //this string will carry the data from given file to the blobs array
     int rowCounter = 0;
-    while(std::getline(inputFile, blobStr))
+    while(std::getline(inputFile, blobStr) && rowCounter < row)
     {
         for(int i = 0; i < column; i++)
         {
             blobs[rowCounter][i] = blobStr[i];
         }
         rowCounter++;
-    }
-
+    } */
+    
+    inputFile.close(); //closing the input file
 
 
     for(int i = 0; i < row; i++)
@@ -55,4 +61,24 @@ int main(void)
     }
     delete[] blobs;
 
+}
+
+void readCharFromFile(std::ifstream& charFile, char** charArr, int row, int column)
+{
+    //reading the input from the file
+    std::string blobStr; //this string will carry the data from given file to the blobs array
+    int rowCounter = 0;
+    while(std::getline(charFile, blobStr) && rowCounter < row)
+    {
+        for(int i = 0; i < column; i++)
+        {
+            charArr[rowCounter][i] = blobStr[i];
+        }
+        rowCounter++;
+    }
+
+    if(rowCounter < row)
+    {
+        std::cerr << "File ended prematurely" << std::endl;
+    }
 }
