@@ -2,11 +2,13 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <iomanip>
 
 void readCharFromFile(std::ifstream& charFile, char** charArr, int row, int column);
 void showBlobs(char** charArr, int row, int column);
-void findBlob(char** charArr, int row, int column);
+void findBlob(std::vector<std::vector<std::vector<int>>>& blob_info, char** charArr, int row, int column);
 void blob_reshaper(std::vector<std::vector<int>>& blob_info_hld, char** charArr, char blob_id, int row, int column, int row_loc, int column_loc);
+void showBlobInfo(const std::vector<std::vector<std::vector<int>>>& blob_info);
 
 
 int main(void)
@@ -41,10 +43,15 @@ int main(void)
 
     showBlobs(blobs, row, column); //shows the blobs with pretty format
 
-    findBlob(blobs, row, column);
+    std::vector<std::vector<std::vector<int>>> blob_info;
+    findBlob(blob_info, blobs, row, column);
+    for(int i = 0; i < blob_info.size(); i++)
+    {
+        std::cout << blob_info.at(i).size() << std::endl;
+    }
 
     showBlobs(blobs, row, column);
-
+    showBlobInfo(blob_info);
     //releasing the memory
     for(int i = 0; i < row; i++)
     {
@@ -119,10 +126,9 @@ void showBlobs(char** charArr, int row, int column)
 
 //ascii number of 'A' is 65
 
-void findBlob(char** charArr, int row, int column)
+void findBlob(std::vector<std::vector<std::vector<int>>>& blob_info, char** charArr, int row, int column)
 {
     char blob_id = 65;
-    std::vector<std::vector<std::vector<int>>> blob_info;
     std::vector<std::vector<int>> blob_info_holder;
     for(int i = 0; i < row; i++)
     {
@@ -137,8 +143,6 @@ void findBlob(char** charArr, int row, int column)
             }
         }
     }
-    std::cout << blob_info.size();
-    std::cout << blob_info_holder.size() << std::endl;
 }
 
 void blob_reshaper(std::vector<std::vector<int>>& blob_info_hld, char** charArr, char blob_id, int row, int column, int row_loc, int column_loc)
@@ -156,4 +160,33 @@ void blob_reshaper(std::vector<std::vector<int>>& blob_info_hld, char** charArr,
     {
         blob_reshaper(blob_info_hld, charArr, blob_id, row, column, row_loc + moves[i][0], column_loc + moves[i][1]);
     }
+}
+
+int sumVector(std::vector<std::vector<int>> vect, int index)
+{
+    int sum = 0;
+    for(int i = 0; i < vect.size(); i++)
+    {
+        sum += vect.at(i).at(index);
+    }
+    return sum;
+}
+void showBlobInfo(const std::vector<std::vector<std::vector<int>>>& blob_info)
+{
+    std::cout << "+------+------------+---------+------------+" << std::endl; //+6+12+9+12+ line format
+    /*std::cout << "|" << std::setw(6) << "BLOB" << "|" << std::setw(12) << "NoOfPixels" << "|";
+    std::cout << std::setw(9) << "CoM Row" << "|" << std::setw(6) << "CoM Column" << "|" << std::endl; */
+    std::cout << "+ BLOB + NoOfPixels + CoM Row + CoM Column +" << std::endl;
+    std::cout << "+------+------------+---------+------------+" << std::endl;
+    for(int i = 0; i < blob_info.size(); i++)
+    {
+        int NoOfPixels = blob_info.at(i).size();
+        float CoM_Row = float(sumVector(blob_info.at(i), 0)) / NoOfPixels;
+        float CoM_Column = float(sumVector(blob_info.at(i), 1)) / NoOfPixels;
+
+        std::cout << std::showpoint << std::fixed << std::setprecision(2);
+        std::cout << "|" << std::setw(6) << i + 1 << "|" << std::right << std::setw(12) << NoOfPixels << "|";
+        std::cout << std::setw(9) << CoM_Row << "|" << std::setw(12) << CoM_Column << "|" << std::endl;
+    }
+    std::cout << "+------+------------+---------+------------+" << std::endl;
 }
