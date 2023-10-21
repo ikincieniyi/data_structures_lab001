@@ -1,0 +1,51 @@
+50 50
+x  x  x xxxxx   x  xx  x  x   xxx  xx x  xxxxx xxx
+x xx xx     xxxx   x xxx    x x  xx x x x xx  xx  
+x xx xx x  x  x x xx  xxx xxxxxxxxxx x xxx x xxx x
+x xxx  x x  x x  xx   x xx x xx  xx x xx xx xxxx x
+ x xx  x   xx x  x  xxxxx x   xx     xxxxx x xx x 
+ x x xx x  xx     xx xxxxx   x  x   x xxxx xxxx  x
+xxx xx xxxxx  x  x xx x  xx     x  x x xxx xxx x x
+xx x xx xx x x xx xxx xxxx  xxx xx  x   x x   x  x
+x xxxx   x  x        xx  xx x    xx   x x  x  xxxx
+ x  xxxxxxx x x xx x xx  x x x xxx  xx    x  x  xx
+x x x   xx x  xxx xx x x x xx x    xx    xxxxx  xx
+x  xx xxxxx x   xx x x  xx   xxx    x xxx xxx x x 
+x     xxx xxx  x x xx x   xxxx  xxxx    x  x x  x 
+xx   xxx  xx  x x xx   xx xxxxx  xxx   x xxxx     
+ x xxxxx  x x      xx x   xxx x     x xxxx x      
+  xxxxx  xxx   x  x x xxxxxx x   x x  x        x x
+ xx    xx  xxx xx  xx  xxx xxx x xxxx  xxxx  x xxx
+x  x  x  xx  x  x x xx x x      xxx  xx x x  xx   
+xx x xxx x x     x    x xx x x x  x  xx xxxx  x  x
+  xxx    x   xx       xxxx x   x  xxxxx x     xxxx
+   xxxx xxxxxx  x xx xxxx xxxxx x x xx x   x    x 
+x x     x xx   xxxxx  x x  xx  xx x  x  xx  xxxx  
+ xxx x x  xx xx  xx xxxxx xx x xxx xxxxx  x xxx x 
+      x  x xx      xxxxx x    x      xxx xx    xx 
+    x    x xxxx  x   xxx xx xx  xx xx xxx x     xx
+ xxxxx x x  xx  xxxx    xxxxx    x      xxxx xxxxx
+ x  xx  xx     x   xx   x x  x  xxx xx xxxxxxx x  
+    xxx    x   x    xxxx    x xx x x    xx  xx xx 
+xxxx  xxx  x x  x  xx     xxxx xx x x x   xx     x
+xx xx   xx  xxxxxxx     x  x xxxx  xxxxxxxxx   x  
+xxxx x xxx x xxxxx xxxxxx xx xxx  xx     x x x    
+ xxxx xx   x  xx x xxxxxx  xxxx xx xxx    x xx   x
+x xxx x   xxx xxxxx x xx xxx xx x   xxxx x  xx  x 
+xx x x  xxx x x x     x   xx  x  x x x  x  xxxx  x
+x  xx    x x x   x xxx  xxx xx  xxx x        xx x 
+xx   x x xx   x xx xx    x xxxx x   x x   xx xxx x
+xx x x xx    xxxxxx x    x x xxxx x x    x        
+   x xxx x x xxx x      xxxx x      xxxx xxxxx x  
+     xxx     x  x xx  xx   x xxx x  xx  xx xxx    
+xxxxx  xx  x   x   xxxxx x  x   x x   xx    xxx xx
+ x   x x       xxx xx xx xx xxx x xx x x xx x  x x
+x x   x    x x x x xxxxx xx x  xxxx x  x  x     xx
+xxxxx x   xx     xxxxx xxxxx   xx x x  xx  x x  xx
+ x x xxxx x xx   x x      x x xxxx  xx    x x xx  
+xxx   x xxx x xxx xx  x x     xxx  x x  xxx    x x
+xxx   xx x  x  xxxx x  xxxx  x xx   x  xxx x xxxxx
+     xxx x    x x     xxxxxx x x xxx  x  x xx xxx 
+xx     xxx x x     xx xxx  xxxxx  x      xxx   xx 
+x     xx x x xxx  xx xxx    x   x x x x x x xx   x
+xx x   xx  xxxx    xx  x    xxx xxx x      xx     

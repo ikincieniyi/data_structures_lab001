@@ -125,7 +125,7 @@ void showBlobs(char** charArr, int row, int column)
 
 void findBlob(std::vector<std::vector<std::vector<int>>>& blob_info, char** charArr, int row, int column)
 {
-    char blob_id = 65;
+    char blob_id = 32;
     std::vector<std::vector<int>> blob_info_holder;
     for(int i = 0; i < row; i++)
     {
@@ -136,7 +136,7 @@ void findBlob(std::vector<std::vector<std::vector<int>>>& blob_info, char** char
                 blob_info_holder.clear();
                 blob_reshaper(blob_info_holder, charArr, blob_id, row, column, i, j);
                 blob_info.push_back(blob_info_holder);
-                blob_id++;
+                //blob_id++;
             }
         }
     }
