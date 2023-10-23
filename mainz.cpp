@@ -4,6 +4,7 @@
 #include <vector>
 #include <iomanip>
 
+
 void readCharFromFile(std::ifstream& charFile, char** charArr, int row, int column);
 void showBlobs(char** charArr, int row, int column);
 void findBlob(std::vector<std::vector<std::vector<int>>>& blob_info, char** charArr, int row, int column);
@@ -43,11 +44,12 @@ int main(void)
 
     showBlobs(blobs, row, column); //shows the blobs with pretty format
 
-    std::vector<std::vector<std::vector<int>>> blob_info;
-    findBlob(blob_info, blobs, row, column);
+    std::vector<std::vector<std::vector<int>>> blob_info; //this vector stores the every blob info
+    findBlob(blob_info, blobs, row, column); //finds the blobs and stores them into the blob_info
 
-    showBlobs(blobs, row, column);
-    showBlobInfo(blob_info);
+    showBlobInfo(blob_info);//shows the The blob number, the number of pixels making up the blob, and its 
+    //center of mass (CoM) in the y and x coordinates, that is, CoM Row and CoM Column
+
     //releasing the memory
     for(int i = 0; i < row; i++)
     {
@@ -125,18 +127,19 @@ void showBlobs(char** charArr, int row, int column)
 
 void findBlob(std::vector<std::vector<std::vector<int>>>& blob_info, char** charArr, int row, int column)
 {
-    char blob_id = 32;
-    std::vector<std::vector<int>> blob_info_holder;
-    for(int i = 0; i < row; i++)
+    char blob_id = 32; //32 is ascii number of space(" ")
+    std::vector<std::vector<int>> blob_info_holder; //carries the every blob info into the blob_info vector
+    for(int i = 0; i < row; i++) //looking for every index
     {
         for(int j = 0; j < column; j++)
         {
-            if(charArr[i][j] == 'x')
+            if(charArr[i][j] == 'x') //if that index has x that means this is a new blob and we will look for other members
             {
-                blob_info_holder.clear();
-                blob_reshaper(blob_info_holder, charArr, blob_id, row, column, i, j);
-                blob_info.push_back(blob_info_holder);
-                //blob_id++;
+                blob_info_holder.clear(); //clears the vector for the new inputs
+                blob_reshaper(blob_info_holder, charArr, blob_id, row, column, i, j); //looks for other blob pixels and
+                                                                                      //stores them in the blob_info_holder
+                blob_info.push_back(blob_info_holder); //adds the new blob's info to the blob_info as a new blob
+                //blob_id++; //we can use this if we want to see the visual result. but it just works with small inputs
             }
         }
     }
@@ -146,13 +149,13 @@ void blob_reshaper(std::vector<std::vector<int>>& blob_info_hld, char** charArr,
 {
     if(row_loc < 0 || column_loc < 0 || row_loc >= row || column_loc >= column || charArr[row_loc][column_loc] != 'x')
     {
-        return;
+        return; //if we are out of the boundaries it returns back
     }
 
-    blob_info_hld.push_back({row_loc, column_loc});
-    charArr[row_loc][column_loc] = blob_id;
+    blob_info_hld.push_back({row_loc, column_loc}); //stores the coordinates of pixel of blobs
+    charArr[row_loc][column_loc] = blob_id; //changes the x with blob_id(currently space) so it will be marked and we wont read that again
     
-    int moves[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    int moves[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}; //looking for right, left, down and up
     for(int i = 0; i < 4; i++)
     {
         blob_reshaper(blob_info_hld, charArr, blob_id, row, column, row_loc + moves[i][0], column_loc + moves[i][1]);
@@ -162,7 +165,7 @@ void blob_reshaper(std::vector<std::vector<int>>& blob_info_hld, char** charArr,
 int sumVector(std::vector<std::vector<int>> vect, int index)
 {
     int sum = 0;
-    for(int i = 0; i < vect.size(); i++)
+    for(int i = 0; i < vect.size(); i++) //sums the numbers that are in the same index
     {
         sum += vect.at(i).at(index);
     }
